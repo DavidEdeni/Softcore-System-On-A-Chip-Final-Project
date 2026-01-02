@@ -1,0 +1,2 @@
+Word of Warning (FYI):
+This project is too big to be run directly from cloud storage. To run this program, download all contents to your user C drive (lowest level directory of your Windows machine) and run it directly from there.
