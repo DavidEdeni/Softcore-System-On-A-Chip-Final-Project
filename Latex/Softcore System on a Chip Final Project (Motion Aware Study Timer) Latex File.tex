@@ -1,0 +1,38 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage{graphicx} % LaTeX package to import graphics
+\graphicspath{{images/}} % Configuring the graphicx package
+\title{
+    \underline{\textbf{Softcore System on a Chip Final Project:}}
+    \underline{\textbf{Motion Aware Study Timer}} % Centered & underlined
+   }
+\author{David Edeni}
+\date{December 15th, 2025}
+\begin{document}
+\maketitle
+\noindent \\\\\\\\ \underline{\textbf{Lab Description:}}
+\maketitle \\\\This project is a Verilog implementation of an FPGA Study Timer that tracks focused study time using motion detection. This timer pauses when motion is detected, and displays focused time on the Nexys DDR-4’s seven-segment display and over a UART interface such as PUTTY.
+\newpage
+\noindent Based on a specified hardware configuration, this is what the Nexys DDR-4 FPGA Board would look like in my project's default state.\\\\\\
+\includegraphics[width=1.2\textwidth]{Nexys4 DDR™ FPGA Board Default State.jpg}
+\newpage 
+\noindent PUTTY is a UART interface program that displays data read from sensors on FPGA Boards such as Nexys DDR-4 Boards and Atmel SAM4L Boards. PUTTY displays a wide variety of data, including temperature, distance, and light frequencies.\\\\\\
+\includegraphics[width=1.2\textwidth]{PuTTY website image.jpg}
+\newpage
+\\\\\\\\\\The temp sensor reader System Verilog module simulates a temperature sensor. It periodically produces a temperature value with small, random variation.\\\\\\
+\underline{Figure 1: The temp sensor reader (temperature sensor reader) module:}\\\\\\
+\includegraphics[width=1\textwidth]{temp_sensor_reader (temperature sensor reader) module.png}\\
+\newpage
+\noindent The sseg driver drives a seven-segment display and makes it flash when motion is detected.\\\\\\
+\underline{Figure 2: The sseg driver (seven-segment display driver) module:}\\\\\\
+\includegraphics[width=0.895\textwidth]{sseg_driver (seven-segment display driver) module.png}
+\\\\\\The motion classifier System Verilog module decides whether the system is "moving" based on changes between consecutive temperature samples.\\\\\\
+\underline{Figure 3: The motion classifier module:}\\\\\\
+\includegraphics[width=1.2\textwidth]{motion classifier module.png}
+\newpage
+\\\\\\The uart tx2 module sends a UART character periodically based on motion read from DDR-4 Board sensors.\\\\\\
+\underline{Figure 4: The uart tx2 module:}\\\\\\
+\includegraphics[width=0.6\textwidth]{uart_tx2 module.jpg}
+\\\\Finally, the motion aware study timer top (system implementation) System Verilog module is the glue that ties all our sub-modules (temp sensor reader, sseg driver, motion classifier) together to drive the DDR-4's seven-segment display. This module connects the FPGA's hardware inputs (clock, switches) and outputs (seven-segment LEDs). It instantiates the four functional modules: temp sensor reader, sseg driver, motion classifier; and wires them together so the motion timer system works properly.\\\\\\
+\underline{Figure 5: The motion aware study timer top (system implementation) module:}\\\\\\
+\includegraphics[width=0.7\textwidth]{motion_aware_study_timer_top module.jpg}
+\end{document}
